@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Video HTML5</title>
+       
+    </head>
+    <body>
+        <video width="600" height="500" id="video">
+            <source src="C:/Users/OvHell/Downloads/2017-05-07 17.43.27.mp4" type="video/mp4">
+        </video>
+        <br><br>
+        <button id="play">></button>
+        <button id="pausa">||</button>
+        <button id="stop">stop</button>
+        <progress id="progreso"></progress>
+        <span id="tiempo"></span>
+        <input type="range" id="volumen" min="0" max="1" step="0.1" value="1">
+        <script>
+            window.addEventListener("load",init);
+            var video, volumen, progreso;
+            function init(){
+                video = document.getElementById("video");
+                volumen = document.getElementById("volumen");
+                document.getElementById("play").addEventListener("click", ponerPlay);
+                document.getElementById("pausa").addEventListener("click", ponerPausa);
+                document.getElementById("stop").addEventListener("click", ponerStop);
+                volumen.addEventListener("change",manejarVolumen);
+                video.addEventListener("timeupdate",actualizarTiempo);
+                video.addEventListener("loadedmetadata",asignarDuracion);
+                progreso = document.getElementById("progreso");
+            }
+        function ponerPlay(){
+            video.play();
+        }
+        function asignarDuracion(){
+            progreso.max = video.duration;
+            console.log(video.duration);
+        }
+        function ponerPausa(){
+            video.pause();
+        }
+        function ponerStop(){
+            video.pause();
+            video.currentTime = 0;
+        }
+        function actualizarTiempo(){
+            document.querySelector("#tiempo").innerHTML = video.currentTime;
+            progreso.value = video.currentTime;
+        }
+        function manejarVolumen(){
+           video.volume = volumen.value;
+        }
+        </script>
+    </body>
+</html>
