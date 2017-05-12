@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Canvas</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--<link href="css/style.css" rel="stylesheet">-->
+    </head>
+    <body> 
+        <canvas id="canvas" width="800" height="600"></canvas>
+        <script>
+            window.addEventListener("load",init);
+            function init(){
+                var canvas = document.getElementById("canvas");
+                var contexto = canvas.getContext("2d");
+                contexto.strokeStyle = "blue";
+                contexto.lineWidth = 10;
+                contexto.beginPath();
+                contexto.moveTo(100,100);
+                contexto.lineTo(200,10);
+                contexto.lineTo(300,100);
+                contexto.closePath();
+                contexto.fill();
+                contexto.lineWidth = 2;
+                contexto.font = "18pt Arial";
+                contexto.strokeText("Triangulo", 135, 140);
+            }
+        </script>
+    </body>
+</html>
