@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Request Animation Frame</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--<link href="css/style.css" rel="stylesheet">-->
+    </head>
+    <body>
+        <canvas id="canvas" width="800" height="500"></canvas>
+        <script>
+            var contexto, canvas;
+            var x=0, y=0, v_x=5, v_y=5;
+            window.addEventListener("load", init);
+            window.requestAnimationFrame = (function(){
+                return window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                function(f){
+                    window.setTimeout(f,1000/60);
+                }
+            })();
+            function init(){
+                canvas = document.getElementById("canvas");
+                contexto = canvas.getContext("2d");
+                draw();
+            }
+            function draw(){
+                contexto.clearRect(0,0,canvas.width,canvas.height);
+                contexto.beginPath();
+                contexto.arc(x,y,50,0 ,Math.PI*2);
+                contexto.closePath();
+                contexto.fill();
+                x += v_x;
+                y += v_y;
+                if(x < 0 || x > canvas.width) v_x = -v_x;
+                if(y < 0 || y > canvas.height) v_y = -v_y;
+                requestAnimationFrame(draw);
+            }
+        </script>
+    </body>
+</html>
