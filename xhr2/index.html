@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>XMLHttpRequest 2</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--<link href="css/style.css" rel="stylesheet">-->
+    </head>
+    <body>
+        <form id="form" action="target.php">
+            <input type="text" name="usuario" placeholder="coloca tu username">
+            <input type="submit" id="send" value="Enviar Username">
+        </form>
+
+        <script>
+            window.addEventListener("load",init);
+            function init(){
+                document.querySelector("#form").addEventListener("submit", sendForm, false);
+            }
+            function sendForm(e){
+                e.preventDefault();
+                var form = this;
+                var formData = new FormData(form);
+
+                var ajax = new XMLHttpRequest();
+                ajax.open("POST","target.php",true);
+                ajax.responseType = "text";
+                ajax.addEventListener("load", function(e){
+                    if(this.status = 200){
+                        console.log(this.response);
+                    }
+                },false);
+                ajax.send(formData);
+                return false;
+            }
+        </script>
+    </body>
+</html>
