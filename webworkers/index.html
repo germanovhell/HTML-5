@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Web Workers</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--<link href="css/style.css" rel="stylesheet">-->
+    </head>
+    <body>
+        <h2>Buscar los numero primeros de 0 a :</h2>
+        <input type="number" id="numero" placeholder="2">
+        <button id="buscar">Buscar N° Primos</button>
+        <script>
+            window.addEventListener("load", init);
+            function init(){
+                document.querySelector("#buscar").addEventListener("click", function(e){
+                    var numero = document.querySelector("#numero").value;
+                    var worker = new Worker("worker.js");
+                    worker.addEventListener("message",function(e){
+                        console.log(e.data);
+                    },false);
+                    worker.postMessage(numero);
+                }, false);
+            }
+        </script>
+    </body>
+</html>
